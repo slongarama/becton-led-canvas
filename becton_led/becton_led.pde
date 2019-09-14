@@ -1,39 +1,134 @@
-PImage img, img2, img3, img4;
-int width = 736;
-int height = 907;
-boolean clicked = false;
+// References:
+    // CPSC 334 Task 1 group portion, see https://github.com/slongarama/cpsc334-generative-art
+    // Particle class: https://processing.org/examples/simpleparticlesystem.html
+ParticleSystem ps;
+
+ArrayList<Rectangle> bectonScreens = new ArrayList<Rectangle>();
+
+String[] lines;
+
+boolean state = false;
+float[] rectUpperLeft = { 0, 0 };
+float[] rectBottomRight = { 0, 0 };
 
 void setup() {
-  size(736, 907);
-  imageMode(CENTER);
+  fullScreen();
+  lines = loadStrings("screenPositions.txt");
+  
+  for (int j = 0; j < lines.length; j++) {
+    String[] coords = lines[j].split(", ", 4);
 
-  img = loadImage("images/eyes.jpg");
-  img2 = loadImage("images/eyes2.jpg");
-  img3 = loadImage("images/ooze.jpg");
-  img4 = loadImage("images/bikinibottom.jpg");
-  img2.resize(width, height);
-  img3.resize(width, height);
-  img4.resize(width, height);
-  img2.mask(img3);
-  img3.mask(img4);
+    rectUpperLeft[0] = parseInt(coords[0]);
+    rectUpperLeft[1] = parseInt(coords[2]);
+    rectBottomRight[0] = parseInt(coords[1]);
+    rectBottomRight[1] = parseInt(coords[3]);
+
+    bectonScreens.add(new Rectangle(rectUpperLeft, rectBottomRight));
+  }
+ 
+  ps = new ParticleSystem(new PVector(width/2, 50));
+}
+
+class Rectangle {
+  float x1, x2, y1, y2, w, h;
+
+  Rectangle(float[] upperLeft, float[] bottomRight) {
+    x1 = upperLeft[0];
+    y1 = upperLeft[1];
+    x2 = bottomRight[0];
+    y2 = bottomRight[1];
+
+    w = x2 - x1;
+    h = y2 - y1;
+  }
+
+  void draw() {
+    fill(255);
+    stroke(0);
+    rect(x1, y1, x2 - x1, y2 - y1);
+
+    fill(0);
+    text(Math.abs(w) + " x " + Math.abs(h), x1 + w / 2 - 40, y1 + h / 2);
+  }
+}
+
+// Processing example: https://processing.org/examples/simpleparticlesystem.html
+// A class to describe a group of Particles
+// An ArrayList is used to manage the list of Particles 
+
+class ParticleSystem {
+  ArrayList<Particle> particles;
+  PVector origin;
+
+  ParticleSystem(PVector position) {
+    origin = position.copy();
+    particles = new ArrayList<Particle>();
+  }
+
+  void addParticle() {
+    particles.add(new Particle(origin));
+  }
+
+  void run() {
+    for (int i = particles.size()-1; i >= 0; i--) {
+      Particle p = particles.get(i);
+      p.run();
+      if (p.isDead()) {
+        particles.remove(i);
+      }
+    }
+  }
+}
+
+class Particle {
+  PVector position;
+  PVector velocity;
+  PVector acceleration;
+  float lifespan;
+
+  Particle(PVector l) {
+    acceleration = new PVector(0, 0.05);
+    velocity = new PVector(random(-1, 1), random(-2, 0));
+    position = l.copy();
+    lifespan = 255.0;
+  }
+
+  void run() {
+    update();
+    display();
+  }
+
+  // Method to update position
+  void update() {
+    velocity.add(acceleration);
+    position.add(velocity);
+    lifespan -= 1.0;
+  }
+
+  // Method to display
+  void display() {
+    stroke(255, lifespan);
+    fill(255, lifespan);
+    ellipse(position.x, position.y, 8, 8);
+  }
+
+  // Is the particle still useful?
+  boolean isDead() {
+    if (lifespan < 0.0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 void draw() {
-  background(img2);
-  if (clicked) {
-    translate(width/2, height/2);
-    rotate(radians(180));
-    translate(-img.width/2, -img.height/2);
+  background(#571845);
+  
+  // For my reference, so I know where the small panels are
+  for (int j = 0; j < bectonScreens.size(); j++) {
+    bectonScreens.get(j).draw();
   }
-  tint(255,100,0,100);
-  image(img, width/2, height/2);
-  tint(210,10);
-  image(img3, width/2, height/2);
-}
-
-void mousePressed() {
-  if (clicked) {
-    clicked = false;
-  }
-  else clicked = true;
+  ps.addParticle();
+  ps.run();
 }

@@ -24,16 +24,13 @@ void drawSmoke () {
       sy = cy + v.y;
     }
   }
-  //colorMode(HSB);
-
-  float r = (float) Math.random() * 255;
-  float g = (float) Math.random() * 255;
-  float b = (float) Math.random() * 255;
-  stroke(r, g, b);
-  //float hue = cx / 10 - startcol;
-  //if (hue < 0) hue += 255;
-  //stroke(hue, 100, 120);
-  strokeWeight(0.1);
+  
+  float hue = cx / 2 - startcol;
+  if (hue < 0) hue += 255;
+  stroke(hue, 100, 120);
+  fill(hue + 20);
+  //noFill();
+  strokeWeight(10);
   vertex(sx, sy);
 
   endShape();

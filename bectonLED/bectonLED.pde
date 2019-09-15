@@ -6,13 +6,10 @@
 // SETUP
 // ----------------------------------------------------------------------
 
-ParticleSystem ps;
-
 ArrayList<Rectangle> bectonScreens = new ArrayList<Rectangle>();
-String[] lines;
+String[] rectangles;
 
 PImage img;
-float diameter;
 
 boolean state = false;
 float[] rectUpperLeft = { 0, 0 };
@@ -20,28 +17,22 @@ float[] rectBottomRight = { 0, 0 };
 
 
 void setup() {
+  frameRate(2);
   fullScreen();
 
   // Load images
   imageMode(CENTER);
-  img = loadImage("images/brush.jpg");
+  img = loadImage("media/brush.jpg");
 
-  // Particles
-  diameter = height/10;
-  ps = new ParticleSystem(new PVector(width-width/5, 50));
+  // Bouncing balls
+   //see bounce.pde
 
   // Draw rectangles
-  lines = loadStrings("screenPositions.txt");
-  for (int j = 0; j < lines.length; j++) {
-    String[] coords = lines[j].split(", ", 4);
+  //drawRectangles();
 
-    rectUpperLeft[0] = parseInt(coords[0]);
-    rectUpperLeft[1] = parseInt(coords[2]);
-    rectBottomRight[0] = parseInt(coords[1]);
-    rectBottomRight[1] = parseInt(coords[3]);
-
-    bectonScreens.add(new Rectangle(rectUpperLeft, rectBottomRight));
-  }
+  textSetup();
+  //String[] fontList = PFont.list();
+  //printArray(fontList);
 }
 
 // ----------------------------------------------------------------------
@@ -49,11 +40,13 @@ void setup() {
 // ----------------------------------------------------------------------
 
 
-boolean justAdded = false;
-
 void draw() {
-  background(#FDBD82);
+    println(frameRate);
+
+  tint(255, 128);
   image(img, width/2, height/2, width, height);
+
+  drawText();
 
   // Draws screen to LED display mapping for reference
   //for (int j = 0; j < bectonScreens.size(); j++) {

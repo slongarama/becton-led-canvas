@@ -3,6 +3,9 @@
 // A class to describe a group of Particles
 // An ArrayList is used to manage the list of Particles 
 
+ParticleSystem ps = new ParticleSystem(new PVector(width-width/5, 50));
+float diameter = height/10;
+
 class ParticleSystem {
   ArrayList<Particle> particles;
   PVector origin;

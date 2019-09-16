@@ -1,5 +1,24 @@
-void drawRectangles () {
-  rectangles = loadStrings("screenPositions.txt");
+// References: https://github.com/slongarama/cpsc334-generative-art
+// --------------------------------------------------------------------
+ArrayList<Rectangle> bectonScreens = new ArrayList<Rectangle>();
+String[] rectangles;
+
+class Rectangle {
+  float x1, x2, y1, y2;
+
+  Rectangle(float[] upperLeft, float[] bottomRight) {
+    x1 = upperLeft[0];
+    y1 = upperLeft[1];
+    x2 = bottomRight[0];
+    y2 = bottomRight[1];
+  }
+}
+
+void loadRectangles () {
+  float[] rectUpperLeft = { 0, 0 };
+  float[] rectBottomRight = { 0, 0 };
+  
+  rectangles = loadStrings("rectangles.txt");
   for (int j = 0; j < rectangles.length; j++) {
     String[] coords = rectangles[j].split(", ", 4);
 

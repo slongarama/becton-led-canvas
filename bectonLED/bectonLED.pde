@@ -10,6 +10,7 @@
 PImage img;
 
 void setup() {
+  frameRate(24);
   fullScreen();
 
   // Load images

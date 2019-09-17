@@ -8,9 +8,7 @@ void textSetup() {
   book = loadStrings("media/chinese.txt");
   bookstring = join(book, "");
 
-  //String[] fontList = PFont.list();
-  //printArray(fontList);
-
+  //PFont f = loadFont("STFangsong-48.vlw");
   longSubstring = bookstring.substring(850, 1000);
   PFont f = createFont("Yuppy SC", 36, true);
   textFont(f, 36);

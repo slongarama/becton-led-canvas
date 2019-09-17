@@ -3,7 +3,7 @@
 // A class to describe a group of Particles
 
 ParticleSystem ps = new ParticleSystem(new PVector(width-width/5, 50));
-float diameter = height;
+float diameter = 2*height;
 PVector startpos;
 
 class ParticleSystem {
@@ -19,6 +19,7 @@ class ParticleSystem {
     for (int i = 0; i < bectonScreens.size(); i++) {
       Rectangle rect = bectonScreens.get(i);
       startpos = new PVector((rect.x1 + rect.x2)/2, (rect.y1 + rect.y2)/2);
+      //startpos = new PVector(rect.x2, rect.y2);
       particles.add(new Particle(startpos));
     }
   }
@@ -58,7 +59,7 @@ class Particle {
     fill(10, saturation, 100, opacity);
     ellipse(position.x, position.y, d1, d1);
 
-    angle += .1;
+    angle += .07;
 
     opacity -= increment;
     if (opacity < 0.0) increment*=-1;

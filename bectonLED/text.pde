@@ -8,7 +8,10 @@ void textSetup() {
   book = loadStrings("media/chinese.txt");
   bookstring = join(book, "");
 
-  longSubstring = bookstring.substring(800, 1100);
+  //String[] fontList = PFont.list();
+  //printArray(fontList);
+
+  longSubstring = bookstring.substring(850, 1000);
   PFont f = createFont("Yuppy SC", 36, true);
   textFont(f, 36);
 }
@@ -27,7 +30,7 @@ void drawMovingText() {
 
     // Display text in specific screen locations
     Rectangle rect = bectonScreens.get(j);
-    text(yuebing[0].charAt(j), rect.x1, rect.y1);
+    text(yuebing[0].charAt(j), ((rect.x1 + rect.x2)/2 - 30), ((rect.y1 + rect.y2)/2)+25);
   }
 
   textAngle += 0.05;
@@ -37,9 +40,10 @@ void drawMovingText() {
 // DRAW BLOCK TEXT
 // --------------------------------------------------------------------
 void drawBlockText() {
+  colorMode(RGB, 255);
   strokeWeight(13);
   fill(255); // color = white
-  textSize(36); // adjust size
+  textSize(80); // adjust size
 
   // Rotate large block of text 
   // References: https://processing.org/discourse/beta/num_1219267259.html
@@ -48,8 +52,6 @@ void drawBlockText() {
   pushMatrix();
   translate(x, y);
   rotate(-HALF_PI);
-  //tint(255, 128);
-  text(longSubstring, 0, .7 * height, width, height);
+  text(longSubstring, 0, 1.3*height, width, height);
   popMatrix();
-  //print("should have printed\n");
 }

@@ -18,7 +18,7 @@ void loadRectangles () {
   float[] rectUpperLeft = { 0, 0 };
   float[] rectBottomRight = { 0, 0 };
   
-  rectangles = loadStrings("rectangles.txt");
+  rectangles = loadStrings("data/rectangles.txt");
   for (int j = 0; j < rectangles.length; j++) {
     String[] coords = rectangles[j].split(", ", 4);
 

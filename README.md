@@ -7,15 +7,16 @@ This past Friday (September 13th 2019) was the Mid-Autumn Festival, a harvest fe
 
 Growing up, Mid-Autumn was always an exciting time of year because it meant special trips to the Chinese grocery store and many delicious varieties of mooncakes. However, since coming to college, I have celebrated the Mid-Autumn festival with less and less intensity each year. This year, it slipped my mind completely. I woke up the following morning thinking about it, only to realize it had just passed.
 
-![Becton Center Entrance](https://github.com/slongarama/bectonLED/blob/master/images/becton_entrance)
-
-![Becton Cafe Full Screen](https://github.com/slongarama/bectonLED/blob/master/images/full_display)
-
-![Small LED Panel Closeup](https://github.com/slongarama/bectonLED/blob/master/images/small_closeup)
-
 This generative art piece is a reflection on my emotions that morning, as I realized that many of the childhood traditions my family once held dear had fallen apart in the face of our collective Americanization. Through images on the Becton Cafe LED display, I hope to invoke in the viewer the same feelings of thoughtful sadness I felt that day. The piece depicts a small child surrounding by Chinese text and pulsating circles meant to emulate mooncakes.
 
 Video: https://youtu.be/bkPSsAsL59k
+
+Becton Center Entrance           |  Small LED Panel Closeup
+:-------------------------:|:-------------------------:
+![](https://github.com/slongarama/bectonLED/blob/master/images/becton_entrance.jpeg) |  ![](https://github.com/slongarama/bectonLED/blob/master/images/small_panels.jpeg)
+
+![Becton Cafe Full Screen](https://github.com/slongarama/bectonLED/blob/master/images/full_display.jpeg)
+
 
 ### Reproducibility
 
